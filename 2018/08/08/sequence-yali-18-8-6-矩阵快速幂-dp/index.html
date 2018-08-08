@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <link href="//cdn.staticfile.org/KaTeX/0.7.1/katex.min.css"rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="dp,矩阵快速幂," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Description一个长为nnn的序列,每个元素都在[1,k][1, k][1,k]之间。 现在小C想在序列后面再加上mmm个[1,k][1, k][1,k]之内的元素,使得本质不同的子序列个数尽量多。 两个子序列被认为是不同的,当且仅当它们长度不同,或者至少一个对应位置的值不同。 输出最大的不同子序列个数,对109+710^9 + 710​9​​+7取模。注意空序列不被看作一个子序列。">
+<meta name="keywords" content="dp,矩阵快速幂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sequence(yali 18.8.6)(矩阵快速幂,dp)(*)">
+<meta property="og:url" content="http://yoursite.com/2018/08/08/sequence-yali-18-8-6-矩阵快速幂-dp/index.html">
+<meta property="og:site_name" content="Jwb&#39;s Blog">
+<meta property="og:description" content="Description一个长为nnn的序列,每个元素都在[1,k][1, k][1,k]之间。 现在小C想在序列后面再加上mmm个[1,k][1, k][1,k]之内的元素,使得本质不同的子序列个数尽量多。 两个子序列被认为是不同的,当且仅当它们长度不同,或者至少一个对应位置的值不同。 输出最大的不同子序列个数,对109+710^9 + 710​9​​+7取模。注意空序列不被看作一个子序列。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-08-08T05:57:09.772Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sequence(yali 18.8.6)(矩阵快速幂,dp)(*)">
+<meta name="twitter:description" content="Description一个长为nnn的序列,每个元素都在[1,k][1, k][1,k]之间。 现在小C想在序列后面再加上mmm个[1,k][1, k][1,k]之内的元素,使得本质不同的子序列个数尽量多。 两个子序列被认为是不同的,当且仅当它们长度不同,或者至少一个对应位置的值不同。 输出最大的不同子序列个数,对109+710^9 + 710​9​​+7取模。注意空序列不被看作一个子序列。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/08/sequence-yali-18-8-6-矩阵快速幂-dp/"/>
+
+
+
+
+
+  <title>sequence(yali 18.8.6)(矩阵快速幂,dp)(*) | Jwb's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jwb's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/sequence-yali-18-8-6-矩阵快速幂-dp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="shuitiacji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jwb's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sequence(yali 18.8.6)(矩阵快速幂,dp)(*)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-08T13:48:30+08:00">
+                2018-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/problem/" itemprop="url" rel="index">
+                    <span itemprop="name">problem</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/problem/杂题/" itemprop="url" rel="index">
+                    <span itemprop="name">杂题</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>一个长为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">n</span></span></span></span>的序列,每个元素都在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>k</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[1, k]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mclose">]</span></span></span></span>之间。</p>
+<p>现在小C想在序列后面再加上<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">m</span></span></span></span>个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mi>k</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[1, k]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mclose">]</span></span></span></span>之内的元素,使得本质不同的子序列个数尽量多。</p>
+<p>两个子序列被认为是不同的,当且仅当它们长度不同,或者至少一个对应位置的值不同。</p>
+<p>输出最大的不同子序列个数,对<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup><mo>+</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">10^9 + 7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.897438em;vertical-align:-0.08333em;"></span><span class="base textstyle uncramped"><span class="mord mathrm">1</span><span class="mord"><span class="mord mathrm">0</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">9</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mbin">+</span><span class="mord mathrm">7</span></span></span></span>取模。注意空序列不被看作一个子序列。</p>
+<a id="more"></a>
+<h4 id="Constraints"><a href="#Constraints" class="headerlink" title="Constraints"></a>Constraints</h4><p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>≤</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mo separator="true">,</mo><mi>m</mi><mo>≤</mo><mn>1</mn><msup><mn>0</mn><mrow><mn>1</mn><mn>8</mn></mrow></msup><mo separator="true">,</mo><mi>k</mi><mo>≤</mo><mn>1</mn><mn>0</mn><mn>0</mn></mrow><annotation encoding="application/x-tex">n \le 10^6, m\le 10^{18}, k\le 100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="base textstyle uncramped"><span class="mord mathit">n</span><span class="mrel">≤</span><span class="mord mathrm">1</span><span class="mord"><span class="mord mathrm">0</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">6</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mpunct">,</span><span class="mord mathit">m</span><span class="mrel">≤</span><span class="mord mathrm">1</span><span class="mord"><span class="mord mathrm">0</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">1</span><span class="mord mathrm">8</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mrel">≤</span><span class="mord mathrm">1</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span></span></span></span></p>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>先考虑怎么算不同子序列个数</p>
+<p>设<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dp[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit">d</span><span class="mord mathit">p</span><span class="mopen">[</span><span class="mord mathit">i</span><span class="mclose">]</span></span></span></span>表示<strong>以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.65952em;"></span><span class="strut bottom" style="height:0.65952em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">i</span></span></span></span>这个数字结尾</strong>的子序列个数，那么显然<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>k</mi></mrow></msubsup><mi>d</mi><mi>p</mi><mo>[</mo><mi>j</mi><mo>]</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">dp[i] = \sum_{j=1}^{k}dp[j] + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8501079999999999em;"></span><span class="strut bottom" style="height:1.2862259999999999em;vertical-align:-0.436118em;"></span><span class="base textstyle uncramped"><span class="mord mathit">d</span><span class="mord mathit">p</span><span class="mopen">[</span><span class="mord mathit">i</span><span class="mclose">]</span><span class="mrel">=</span><span class="mop"><span class="op-symbol small-op mop" style="top:-0.0000050000000000050004em;">∑</span><span class="vlist"><span style="top:0.30001em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit" style="margin-right:0.05724em;">j</span><span class="mrel">=</span><span class="mord mathrm">1</span></span></span></span><span style="top:-0.364em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">d</span><span class="mord mathit">p</span><span class="mopen">[</span><span class="mord mathit" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mbin">+</span><span class="mord mathrm">1</span></span></span></span></p>
+<p>容易发现，无论接下来的元素是什么，其他的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo>[</mo><mi>x</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">dp[x]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit">d</span><span class="mord mathit">p</span><span class="mopen">[</span><span class="mord mathit">x</span><span class="mclose">]</span></span></span></span>都是没有变化的</p>
+<p>所以我们贪心地填当前的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">dp</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base textstyle uncramped"><span class="mord mathit">d</span><span class="mord mathit">p</span></span></span></span>值最小的那个元素，也就是最后出现位置最靠前的那个元素</p>
+<p>直接填是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>m</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathit">m</span><span class="mclose">)</span></span></span></span>的，不难发现我们填的一定是一个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span>的排列重复若干次，所以每<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span>个元素的转移都是相同的</p>
+<p>因此我们可以矩阵快速幂优化</p>
+<p>设<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit">a</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">i</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span>为<strong>以第<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.65952em;"></span><span class="strut bottom" style="height:0.65952em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit">i</span></span></span></span>个位置结尾</strong>的答案，显然<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mi>i</mi><mo>−</mo><mi>k</mi></mrow><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msubsup><msub><mi>a</mi><mi>j</mi></msub><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a_i=\sum_{j=i-k}^{i-1}a_j + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.864795em;"></span><span class="strut bottom" style="height:1.3022109999999998em;vertical-align:-0.4374159999999999em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit">a</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">i</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mrel">=</span><span class="mop"><span class="op-symbol small-op mop" style="top:-0.0000050000000000050004em;">∑</span><span class="vlist"><span style="top:0.3013079999999999em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit" style="margin-right:0.05724em;">j</span><span class="mrel">=</span><span class="mord mathit">i</span><span class="mbin">−</span><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span><span style="top:-0.403131em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">i</span><span class="mbin">−</span><span class="mord mathrm">1</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord"><span class="mord mathit">a</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.05724em;">j</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mbin">+</span><span class="mord mathrm">1</span></span></span></span>那么我们就是要构造一个矩阵<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span>，使得</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi><mo>×</mo><mrow><mo fence="true">[</mo><mtable><mtr><mtd><mrow><mn>1</mn></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>a</mi><mrow><mn>1</mn></mrow></msub></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>a</mi><mrow><mn>2</mn></mrow></msub></mrow></mtd></mtr><mtr><mtd><mrow><msubsup><mi>a</mi><mrow><mi>k</mi></mrow><mrow><mi mathvariant="normal">⋮</mi></mrow></msubsup></mrow></mtd></mtr></mtable><mo fence="true">]</mo></mrow><mo>=</mo><mrow><mo fence="true">[</mo><mtable><mtr><mtd><mrow><mn>1</mn></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>a</mi><mrow><mn>2</mn></mrow></msub></mrow></mtd></mtr><mtr><mtd><mrow><msub><mi>a</mi><mrow><mn>1</mn></mrow></msub></mrow></mtd></mtr><mtr><mtd><mrow><msubsup><mi>a</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi mathvariant="normal">⋮</mi></mrow></msubsup></mrow></mtd></mtr></mtable><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">B \times \begin{bmatrix} 1 \\ a_{1} \\ a_{2} \\ a^{\vdots }_{k} \end{bmatrix} = \begin{bmatrix} 1\\a_{2} \\ a_{1} \\ a^{\vdots }_{k+1} \end{bmatrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:2.7515000000000005em;"></span><span class="strut bottom" style="height:5.003000000000001em;vertical-align:-2.2515000000000005em;"></span><span class="base displaystyle textstyle uncramped"><span class="mord mathit" style="margin-right:0.05017em;">B</span><span class="mbin">×</span><span class="minner displaystyle textstyle uncramped"><span class="style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing mult"><span class="vlist"><span style="top:1.50501em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎣</span></span></span><span style="top:0.35001000000000015em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-0.2509899999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-1.49701em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎡</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist"><span style="top:-1.9115000000000004em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">1</span></span></span><span style="top:-0.7115000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord"><span class="mord mathit">a</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathrm">1</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span style="top:0.4885em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord"><span class="mord mathit">a</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathrm">2</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span style="top:1.8915000000000004em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord"><span class="mord mathit">a</span><span class="vlist"><span style="top:0.254108em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit" style="margin-right:0.03148em;">k</span></span></span></span><span style="top:-0.41300000000000003em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">⋮</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span class="style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing mult"><span class="vlist"><span style="top:1.50501em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎦</span></span></span><span style="top:0.35001000000000015em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-0.2509899999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-1.49701em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎤</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span class="mrel">=</span><span class="minner displaystyle textstyle uncramped"><span class="style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing mult"><span class="vlist"><span style="top:1.50501em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎣</span></span></span><span style="top:0.35001000000000015em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-0.2509899999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-1.49701em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎡</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist"><span style="top:-1.9115em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">1</span></span></span><span style="top:-0.7114999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord"><span class="mord mathit">a</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathrm">2</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span style="top:0.48850000000000043em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord"><span class="mord mathit">a</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathrm">1</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span style="top:1.8915em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord"><span class="mord mathit">a</span><span class="vlist"><span style="top:0.254108em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit" style="margin-right:0.03148em;">k</span><span class="mbin">+</span><span class="mord mathrm">1</span></span></span></span><span style="top:-0.4129999999999999em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">⋮</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span class="style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing mult"><span class="vlist"><span style="top:1.50501em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎦</span></span></span><span style="top:0.35001000000000015em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-0.2509899999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-1.49701em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎤</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span></span></span></span><p>那么显然</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi><mo>=</mo><mrow><mo fence="true">[</mo><mtable><mtr><mtd><mrow><mn>1</mn></mrow></mtd><mtd><mrow><mn>0</mn></mrow></mtd><mtd><mrow><mn>0</mn></mrow></mtd><mtd><mrow><mn>0</mn></mrow></mtd><mtd><mrow><mo>…</mo></mrow></mtd><mtd><mrow><mn>0</mn></mrow></mtd></mtr><mtr><mtd><mrow><mn>0</mn></mrow></mtd><mtd><mrow><mn>0</mn></mrow></mtd><mtd><mrow><mn>1</mn></mrow></mtd><mtd><mrow><mn>0</mn></mrow></mtd><mtd><mrow><mo>…</mo></mrow></mtd><mtd><mrow><mn>0</mn></mrow></mtd></mtr><mtr><mtd><mrow><mn>0</mn></mrow></mtd><mtd><mrow><mn>0</mn></mrow></mtd><mtd><mrow><mn>0</mn></mrow></mtd><mtd><mrow><mn>1</mn></mrow></mtd><mtd><mrow><mo>…</mo></mrow></mtd><mtd><mrow><mn>0</mn></mrow></mtd></mtr><mtr><mtd><mrow></mrow></mtd><mtd><mrow></mrow></mtd><mtd><mrow><mo>…</mo></mrow></mtd><mtd><mrow></mrow></mtd><mtd><mrow></mrow></mtd></mtr><mtr><mtd><mrow><mn>1</mn></mrow></mtd><mtd><mrow><mn>1</mn></mrow></mtd><mtd><mrow><mn>1</mn></mrow></mtd><mtd><mrow><mn>1</mn></mrow></mtd><mtd><mrow><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi></mrow></mtd><mtd><mrow><mn>1</mn></mrow></mtd></mtr></mtable><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">B=\begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; 0 &amp; \ldots &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 &amp; \ldots &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 &amp; \ldots &amp; 0 \\ &amp; &amp; \ldots &amp; &amp; \\ 1 &amp; 1 &amp; 1 &amp; 1 &amp; ... &amp; 1 \end{bmatrix}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:3.2540000000000004em;"></span><span class="strut bottom" style="height:6.00404em;vertical-align:-2.75004em;"></span><span class="base displaystyle textstyle uncramped"><span class="mord mathit" style="margin-right:0.05017em;">B</span><span class="mrel">=</span><span class="minner displaystyle textstyle uncramped"><span class="style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing mult"><span class="vlist"><span style="top:2.1050199999999997em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎣</span></span></span><span style="top:0.9500199999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:0.3490199999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-0.2519800000000001em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-0.8529800000000001em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎢</span></span></span><span style="top:-2.099em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎡</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist"><span style="top:-2.41em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">1</span></span></span><span style="top:-1.2100000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:1.1900000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"></span></span><span style="top:2.3900000000000006em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist"><span style="top:-2.41em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:1.1900000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"></span></span><span style="top:2.3900000000000006em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist"><span style="top:-2.41em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">1</span></span></span><span style="top:-0.009999999999999953em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:1.1900000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="minner">…</span></span></span><span style="top:2.3900000000000006em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist"><span style="top:-2.41em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">1</span></span></span><span style="top:1.1900000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"></span></span><span style="top:2.3900000000000006em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist"><span style="top:-2.41em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="minner">…</span></span></span><span style="top:-1.2100000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="minner">…</span></span></span><span style="top:-0.009999999999999953em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="minner">…</span></span></span><span style="top:1.1900000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"></span></span><span style="top:2.3900000000000006em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">.</span><span class="mord mathrm">.</span><span class="mord mathrm">.</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist"><span style="top:-2.41em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:-1.2100000000000002em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:-0.009999999999999953em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">0</span></span></span><span style="top:2.39em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="mord displaystyle textstyle uncramped"><span class="mord mathrm">1</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span class="style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing mult"><span class="vlist"><span style="top:2.1050199999999997em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎦</span></span></span><span style="top:0.9500199999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:0.3490199999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-0.2519800000000001em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-0.8529800000000001em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎥</span></span></span><span style="top:-2.099em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="delimsizinginner delim-size4"><span>⎤</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span></span></span></span><p>然后就可以直接矩阵快速幂了</p>
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">5e5</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">'-'</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = (x &lt;&lt; <span class="number">3</span>) + (x &lt;&lt; <span class="number">1</span>) + (c ^ <span class="number">48</span>); c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tree</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> x1, x2, y1, y2;</span><br><span class="line">&#125;t[maxn &lt;&lt; <span class="number">2</span>], ans;</span><br><span class="line"><span class="keyword">int</span> fg;</span><br><span class="line"><span class="keyword">int</span> n, ta, tb, T, q, A, B;</span><br><span class="line"><span class="keyword">int</span> p[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Pow</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> P)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> r = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(P)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(P &amp; <span class="number">1</span>) r = <span class="number">1L</span>L * x * r % mod;</span><br><span class="line">		x = <span class="number">1L</span>L * x * x % mod; P &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">tree <span class="title">merge</span><span class="params">(<span class="keyword">const</span> tree &amp;a, <span class="keyword">const</span> tree &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x1, x2, y1, y2;</span><br><span class="line">	x2 = <span class="number">1L</span>L * b.x2 * a.x2 % mod;</span><br><span class="line">	y2 = (<span class="number">1L</span>L * b.x2 * a.y2 % mod + b.y2) % mod;</span><br><span class="line">	x1 = <span class="number">1L</span>L * b.x1 * a.x2 % mod;</span><br><span class="line">	y1 = (b.y1 + <span class="number">1L</span>L * a.y2 * b.x1 % mod) % mod;</span><br><span class="line">	x1 += a.x1; y1 += a.y1;</span><br><span class="line">	x1 %= mod; y1 %= mod;</span><br><span class="line">	<span class="keyword">return</span> (tree)&#123;x1, x2, y1, y2&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l == r)</span><br><span class="line">	&#123;</span><br><span class="line">		t[o].x2 = ((p[l] - <span class="number">1L</span>L * p[l] * T % mod + T) % mod + mod) % mod; t[o].y2 = p[l];</span><br><span class="line">		t[o].x1 = p[l]; t[o].y1 = p[l];</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	build(o &lt;&lt; <span class="number">1</span>, l, mid); build(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">	t[o] = merge(t[o &lt;&lt; <span class="number">1</span>], t[o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">&#125;	</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">upt</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> pos)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l == r)</span><br><span class="line">	&#123;</span><br><span class="line">		t[o].x2 = ((p[l] - <span class="number">1L</span>L * p[l] * T % mod + T) % mod + mod) % mod; t[o].y2 = p[l];</span><br><span class="line">		t[o].x1 = p[l]; t[o].y1 = p[l];</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(pos &lt;= mid) upt(o &lt;&lt; <span class="number">1</span>, l, mid, pos);</span><br><span class="line">	<span class="keyword">else</span> upt(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, pos);</span><br><span class="line">	t[o] = merge(t[o &lt;&lt; <span class="number">1</span>], t[o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">que</span><span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(fg) ans = t[o], fg = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">else</span> ans = merge(ans, t[o]);</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(x &lt;= mid) que(o &lt;&lt; <span class="number">1</span>, l, mid, x, y);</span><br><span class="line">	<span class="keyword">if</span>(y &gt; mid) que(o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, x, y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> BIT</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> c[maxn];</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> x &amp; (-x); &#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">upt</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">while</span>(x &lt;= n)</span><br><span class="line">		&#123;</span><br><span class="line">			c[x] = (c[x] + v) % mod; x += lowbit(x);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">que</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(x)</span><br><span class="line">		&#123;</span><br><span class="line">			ret = (ret + c[x]) % mod; x -= lowbit(x);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> ret;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	freopen(<span class="string">"omeed.in"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"omeed.out"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">	<span class="keyword">int</span> xz_ak_IOI = read();</span><br><span class="line">	n = read(); q = read(); ta = read(); tb = read(); A = read(); B = read();</span><br><span class="line">	T = <span class="number">1L</span>L * ta * Pow(tb, mod - <span class="number">2</span>) % mod;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> x = read(), y = read();</span><br><span class="line">		p[i] = <span class="number">1L</span>L * x * Pow(y, mod - <span class="number">2</span>) % mod;</span><br><span class="line">		BIT::upt(i, p[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	build(<span class="number">1</span>, <span class="number">1</span>, n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= q; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> opt = read();</span><br><span class="line">		<span class="keyword">if</span>(opt == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> x = read(), y = read(), z = read();</span><br><span class="line"><span class="comment">/**/</span>		BIT::upt(x, (-p[x] + mod) % mod);</span><br><span class="line">			p[x] = <span class="number">1L</span>L * y * Pow(z, mod - <span class="number">2</span>) % mod;</span><br><span class="line">			upt(<span class="number">1</span>, <span class="number">1</span>, n, x); BIT::upt(x, p[x]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> </span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> x = read(), y = read();</span><br><span class="line">			fg = <span class="number">1</span>;</span><br><span class="line">			que(<span class="number">1</span>, <span class="number">1</span>, n, x, y);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, (<span class="number">1L</span>L * A * ((BIT::que(y) - BIT::que(x - <span class="number">1</span>) + mod) % mod) % mod + <span class="number">1L</span>L * B * ans.y1 % mod) % mod);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><p>165行，加mod模mod</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dp/" rel="tag"># dp</a>
+          
+            <a href="/tags/矩阵快速幂/" rel="tag"># 矩阵快速幂</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/08/omeed-yali-18-8-6-期望-线段树/" rel="next" title="omeed(yali 18.8.6)(期望,线段树)(*)">
+                <i class="fa fa-chevron-left"></i> omeed(yali 18.8.6)(期望,线段树)(*)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/08/luoguP3980-NOI2008-志愿者招募-单纯形法/" rel="prev" title="luoguP3980 [NOI2008]志愿者招募(单纯形法)(*)">
+                luoguP3980 [NOI2008]志愿者招募(单纯形法)(*) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">shuitiacji</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Friendly_Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hk-cnyali.com/" title="hk-cnyali" target="_blank">hk-cnyali</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Constraints"><span class="nav-number">2.</span> <span class="nav-text">Constraints</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number"></span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debug"><span class="nav-number"></span> <span class="nav-text">Debug</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">shuitiacji</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

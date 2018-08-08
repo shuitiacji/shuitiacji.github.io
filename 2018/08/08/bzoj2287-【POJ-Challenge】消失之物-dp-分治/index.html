@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="博弈,贪心," />
+  <meta name="keywords" content="dp,分治," />
 
 
 
@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="DescriptionFkb不喜欢运动,所以这天体育课他和博弈 doe 在操场上博弈。操场上有 个点, Fkb 和博弈 doe 轮流选择一个 点, Fkb先选,最后每个人的得分是他所选取的两两点之间的欧几里德距离之和。令 V=Fkb 得分 - 博弈 doe 得分, Fkb要最大化 V ,而博弈 doe 要最小化 V ,他们都采取最优策略,那么最终 V 会是多少?">
-<meta name="keywords" content="博弈,贪心">
+<meta name="description" content="Descriptionftiasch 有 N 个物品, 体积分别是 W1, W2, ..., WN。 由于她的疏忽, 第 i 个物品丢失了。 “要使用剩下的 N - 1 物品装满容积为 x 的背包，有几种方法呢？” -- 这是经典的问题了。她把答案记为 Count(i, x) ，想要得到所有1 &amp;lt;= i &amp;lt;= N, 1 &amp;lt;= x &amp;lt;= M的 Count(i, x) 表格。">
+<meta name="keywords" content="dp,分治">
 <meta property="og:type" content="article">
-<meta property="og:title" content="by(yali 18.8.5)(博弈)(*)">
-<meta property="og:url" content="http://yoursite.com/2018/08/07/by-yali-18-8-5-博弈/index.html">
+<meta property="og:title" content="bzoj2287: 【POJ Challenge】消失之物(dp,分治)(*)">
+<meta property="og:url" content="http://yoursite.com/2018/08/08/bzoj2287-【POJ-Challenge】消失之物-dp-分治/index.html">
 <meta property="og:site_name" content="Jwb&#39;s Blog">
-<meta property="og:description" content="DescriptionFkb不喜欢运动,所以这天体育课他和博弈 doe 在操场上博弈。操场上有 个点, Fkb 和博弈 doe 轮流选择一个 点, Fkb先选,最后每个人的得分是他所选取的两两点之间的欧几里德距离之和。令 V=Fkb 得分 - 博弈 doe 得分, Fkb要最大化 V ,而博弈 doe 要最小化 V ,他们都采取最优策略,那么最终 V 会是多少?">
+<meta property="og:description" content="Descriptionftiasch 有 N 个物品, 体积分别是 W1, W2, ..., WN。 由于她的疏忽, 第 i 个物品丢失了。 “要使用剩下的 N - 1 物品装满容积为 x 的背包，有几种方法呢？” -- 这是经典的问题了。她把答案记为 Count(i, x) ，想要得到所有1 &amp;lt;= i &amp;lt;= N, 1 &amp;lt;= x &amp;lt;= M的 Count(i, x) 表格。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-08-08T00:03:30.140Z">
+<meta property="og:updated_time" content="2018-08-08T09:44:09.457Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="by(yali 18.8.5)(博弈)(*)">
-<meta name="twitter:description" content="DescriptionFkb不喜欢运动,所以这天体育课他和博弈 doe 在操场上博弈。操场上有 个点, Fkb 和博弈 doe 轮流选择一个 点, Fkb先选,最后每个人的得分是他所选取的两两点之间的欧几里德距离之和。令 V=Fkb 得分 - 博弈 doe 得分, Fkb要最大化 V ,而博弈 doe 要最小化 V ,他们都采取最优策略,那么最终 V 会是多少?">
+<meta name="twitter:title" content="bzoj2287: 【POJ Challenge】消失之物(dp,分治)(*)">
+<meta name="twitter:description" content="Descriptionftiasch 有 N 个物品, 体积分别是 W1, W2, ..., WN。 由于她的疏忽, 第 i 个物品丢失了。 “要使用剩下的 N - 1 物品装满容积为 x 的背包，有几种方法呢？” -- 这是经典的问题了。她把答案记为 Count(i, x) ，想要得到所有1 &amp;lt;= i &amp;lt;= N, 1 &amp;lt;= x &amp;lt;= M的 Count(i, x) 表格。">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/07/by-yali-18-8-5-博弈/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/08/bzoj2287-【POJ-Challenge】消失之物-dp-分治/"/>
 
 
 
 
 
-  <title>by(yali 18.8.5)(博弈)(*) | Jwb's Blog</title>
+  <title>bzoj2287: 【POJ Challenge】消失之物(dp,分治)(*) | Jwb's Blog</title>
   
 
 
@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/07/by-yali-18-8-5-博弈/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/bzoj2287-【POJ-Challenge】消失之物-dp-分治/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="shuitiacji">
@@ -271,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">by(yali 18.8.5)(博弈)(*)</h1>
+          <h1 class="post-title" itemprop="name headline">bzoj2287: 【POJ Challenge】消失之物(dp,分治)(*)</h1>
         
 
         <div class="post-meta">
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-07T21:42:41+08:00">
-                2018-08-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-08T17:43:13+08:00">
+                2018-08-08
               </time>
             
 
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/problem/杂题/" itemprop="url" rel="index">
-                    <span itemprop="name">杂题</span>
+                  <a href="/categories/problem/bzoj/" itemprop="url" rel="index">
+                    <span itemprop="name">bzoj</span>
                   </a>
                 </span>
 
@@ -354,14 +354,17 @@
       
 
       
-        <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Fkb不喜欢运动,所以这天体育课他和博弈 doe 在操场上博弈。操场上有 个点, Fkb 和博弈 doe 轮流选择一个
-点, Fkb先选,最后每个人的得分是他所选取的两两点之间的欧几里德距离之和。令 V=Fkb 得分 - 博弈 doe 得分, Fkb要最大化 V ,而博弈 doe 要最小化 V ,他们都采取最优策略,那么最终 V 会是多少?</p>
+        <h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>ftiasch 有 <em>N</em> 个物品, 体积分别是 <em>W1</em>, <em>W2</em>, ..., <em>WN</em>。 由于她的疏忽, 第 <em>i</em> 个物品丢失了。 “要使用剩下的 <em>N</em> - 1 物品装满容积为 <em>x</em> 的背包，有几种方法呢？” -- 这是经典的问题了。她把答案记为 <em>Count(i, x)</em> ，想要得到所有1 &lt;= i &lt;= N, 1 &lt;= x &lt;= M的 <em>Count(i, x)</em> 表格。</p>
 <a id="more"></a>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>这个题有个很显然的套路，把边权化成点权。即把一条边的权值除以2，分别给到它连的两个点上。</p>
-<p>把V计算成Fkb选的点权减去doe选的点权，这个显然是对的，因为一条边的值计算进去只有可能两边的两个点都被一个人选了，如果两个人分别选了这两个点，就会把这条边的权值给减完了</p>
-<p>把点按点权排序，两个人贪心选一下就行了</p>
-<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2510</span> &lt;&lt; <span class="number">1</span>;</span><br><span class="line"><span class="comment">/**/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> squ(x) ((x) * (x))</span></span><br><span class="line"><span class="keyword">double</span> v[maxn], x[maxn], y[maxn];</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dis</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">sqrt</span>(squ(x[a] - x[b]) + squ(y[a] - y[b])); &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span> </span>&#123; <span class="keyword">return</span> a &gt; b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	freopen(<span class="string">"by.in"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"by.out"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	n *= <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) <span class="built_in">scanf</span>(<span class="string">"%lf%lf"</span>, &amp;x[i], &amp;y[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">			v[i] += dis(i, j);</span><br><span class="line">	sort(v + <span class="number">1</span>, v + n + <span class="number">1</span>, cmp);</span><br><span class="line">	<span class="keyword">double</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(i &amp; <span class="number">1</span>) ans += v[i];</span><br><span class="line">		<span class="keyword">else</span> ans -= v[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%.3lf\n"</span>, ans / <span class="number">2.</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><p>第5行，一定要写成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mo>(</mo><mi>x</mi><mo>)</mo><mo>×</mo><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">((x) \times (x))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mopen">(</span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mclose">)</span><span class="mbin">×</span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>不能写成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>x</mi><mo>×</mo><mi>x</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(x \times x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base textstyle uncramped"><span class="mopen">(</span><span class="mord mathit">x</span><span class="mbin">×</span><span class="mord mathit">x</span><span class="mclose">)</span></span></span></span></p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>一种经典的套路，用分治减少重复计算，你会发现它与bzoj3237很像，都是去掉一些东西，然后再算答案，而且去掉的东西很少</p>
+<p>考虑一种暴力，对每种物品，去掉它再跑背包</p>
+<p>你会发现，由于物品的顺序对答案无影响，有大量的重复计算部分，比如说去掉i，你需要算(i+1,n)物品的贡献，去掉j，你需要算(j+1,n)物品的贡献，而(i+1,n)与(j+1,n)显然有重叠，考虑利用这部分</p>
+<p>把所有的东西，一起跑一遍分治，当前分治区间(l,r)表示已算上了(1,l-1)与(r+1,n)物品的背包</p>
+<p>将[l,r]分为两段,如果要处理[l,mid],就用(mid,r]的物品更新当前背包;处理(mid,r],就用[l,mid]的物品去更新当前
+背包。
+•l=r时,当前背包就是去掉物品l的答案了。</p>
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2e3</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">25</span>][maxn], w[maxn], n, m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gao</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> dep)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l == r)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) <span class="built_in">printf</span>(<span class="string">"%d"</span>, dp[dep][i] % <span class="number">10</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line"><span class="comment">/**/</span><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; ++i) dp[dep + <span class="number">1</span>][i] = dp[dep][i];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = mid + <span class="number">1</span>; i &lt;= r; ++i)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = m; j &gt;= w[i]; --j)</span><br><span class="line">			dp[dep + <span class="number">1</span>][j] = (dp[dep + <span class="number">1</span>][j] + dp[dep + <span class="number">1</span>][j - w[i]]) % <span class="number">10</span>;</span><br><span class="line">	gao(l, mid, dep + <span class="number">1</span>);</span><br><span class="line"><span class="comment">/**/</span><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; ++i) dp[dep + <span class="number">1</span>][i] = dp[dep][i];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = l; i &lt;= mid; ++i)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = m; j &gt;= w[i]; --j)</span><br><span class="line">			dp[dep + <span class="number">1</span>][j] = (dp[dep + <span class="number">1</span>][j] + dp[dep + <span class="number">1</span>][j - w[i]]) % <span class="number">10</span>;</span><br><span class="line">	gao(mid + <span class="number">1</span>, r, dep + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	freopen(<span class="string">"a.in"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"a.out"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;w[i]);</span><br><span class="line">	dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	gao(<span class="number">1</span>, n, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><p>14行19行，要从零开始</p>
 
       
     </div>
@@ -379,9 +382,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/博弈/" rel="tag"># 博弈</a>
+            <a href="/tags/dp/" rel="tag"># dp</a>
           
-            <a href="/tags/贪心/" rel="tag"># 贪心</a>
+            <a href="/tags/分治/" rel="tag"># 分治</a>
           
         </div>
       
@@ -394,8 +397,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/1926/08/17/Hello-World/" rel="next" title="Hello World!">
-                <i class="fa fa-chevron-left"></i> Hello World!
+              <a href="/2018/08/08/luoguP3980-NOI2008-志愿者招募-单纯形法/" rel="next" title="luoguP3980 [NOI2008]志愿者招募(单纯形法)(*)">
+                <i class="fa fa-chevron-left"></i> luoguP3980 [NOI2008]志愿者招募(单纯形法)(*)
               </a>
             
           </div>
@@ -403,10 +406,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/08/bag-yali-18-8-5-背包dp/" rel="prev" title="bag(yali 18.8.5)(背包dp)(*)">
-                bag(yali 18.8.5)(背包dp)(*) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
